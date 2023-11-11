@@ -16,6 +16,12 @@ $notificationAreaValueName = "NoTrayItemsDisplay"
 # Set the "hide the notification area" policy to 0 to disable it
 Set-GPRegistryValue -Key $notificationAreaRegistryPath -ValueName $notificationAreaValueName -Type DWORD -Value 0
 
+# Stop the Windows Explorer process
+Stop-Process -Name explorer -Force
+
+# Start the Windows Explorer process
+Start-Process explorer
+
 # Download Ngrok
 Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip"
 
