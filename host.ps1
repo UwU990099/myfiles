@@ -1,3 +1,22 @@
+# Specify the path to the registry setting for desktop wallpaper
+$wallpaperRegistryPath = "HKCU\Software\Policies\Microsoft\Windows\Personalization"
+
+# Specify the name for the "desktop wallpaper" policy
+$wallpaperValueName = "Wallpaper"
+
+# Remove the desktop wallpaper policy by setting it to $null
+Set-GPRegistryValue -Key $wallpaperRegistryPath -ValueName $wallpaperValueName -Type String -Value $null
+
+# Specify the path to the registry setting for hiding the notification area
+$notificationAreaRegistryPath = "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+
+# Specify the name for the "hide the notification area" policy
+$notificationAreaValueName = "NoTrayItemsDisplay"
+
+# Set the "hide the notification area" policy to 0 to disable it
+Set-GPRegistryValue -Key $notificationAreaRegistryPath -ValueName $notificationAreaValueName -Type DWORD -Value 0
+
+# Download Ngrok
 Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip"
 
 # Create directory
