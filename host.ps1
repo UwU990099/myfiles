@@ -1,4 +1,5 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$ProgressPreference = 'SilentlyContinue'
 
 # Make folders
 New-Item -ItemType Directory -Path "C:\LGPO" -Force
