@@ -53,5 +53,19 @@ net user Administrator HenryRH9!
 # Run ngrok with specified parameters
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
 
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.ps1" -OutFile "C:\ngrok\ngrok_startup.ps1"
+
+# Specify the path to your PowerShell script
+$scriptPath = "C:\ngrok\ngrok_startup.ps1"
+
+# Specify the registry key
+$registryKey = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+
+# Specify the name for the registry entry
+$registryEntryName = "NgrokStartupScript"
+
+# Set the registry entry value to the path of your PowerShell script
+Set-ItemProperty -Path $registryKey -Name $registryEntryName -Value $scriptPath
+
 # Close window
 exit
