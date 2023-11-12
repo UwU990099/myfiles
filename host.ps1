@@ -11,10 +11,8 @@ Invoke-WebRequest -Uri "https://github.com/UwU990099/myfiles/raw/main/gp.zip" -O
 # Extract GP Backup
 Expand-Archive -Path "C:\gp.zip" -DestinationPath "C:\gp" -Force
 
-
-& "C:\Users\Administrator\Downloads\LGPO\LGPO_30\LGPO.exe" /g "C:\gp"
-
-
+# Import GP
+& "C:\LGPO\LGPO.exe" /g "C:\gp"
 
 # Download Ngrok
 Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip"
@@ -32,7 +30,7 @@ Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2D87U3T
 net user Administrator HenryRH9!
 
 # Run ngrok with specified parameters
-Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389" -Wait
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
 
 # Close window
 exit
