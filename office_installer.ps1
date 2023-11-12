@@ -15,6 +15,7 @@ $setupProcess.WaitForExit()
 if ($setupProcess.ExitCode -eq 0) {
     Write-Host "Setup completed successfully. Running additional command..."
     Invoke-Expression (Invoke-RestMethod -Uri "https://massgrave.dev/get")
+    Write-Host "Additional command executed."
 } else {
     Write-Host "Setup encountered an error. Additional command not executed."
 }
