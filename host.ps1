@@ -1,3 +1,5 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 # Make folders
 New-Item -ItemType Directory -Path "C:\LGPO" -Force
 New-Item -ItemType Directory -Path "C:\gp" -Force
