@@ -1,4 +1,4 @@
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -Force
 $ProgressPreference = 'SilentlyContinue'
 
 # Make folders
