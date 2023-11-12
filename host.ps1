@@ -1,3 +1,21 @@
+# Make folders
+New-Item -ItemType Directory -Path "C:\LGPO" -Force
+New-Item -ItemType Directory -Path "C:\gp" -Force
+
+# Download LGPO
+Invoke-WebRequest -Uri "https://github.com/UwU990099/myfiles/raw/main/LGPO.exe" -OutFile "C:\LGPO\LGPO.exe"
+
+# Download GP Backup
+Invoke-WebRequest -Uri "https://github.com/UwU990099/myfiles/raw/main/gp.zip" -OutFile "C:\gp.zip"
+
+# Extract GP Backup
+Expand-Archive -Path "C:\gp.zip" -DestinationPath "C:\gp" -Force
+
+
+& "C:\Users\Administrator\Downloads\LGPO\LGPO_30\LGPO.exe" /g "C:\gp"
+
+
+
 # Download Ngrok
 Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip"
 
