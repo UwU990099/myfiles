@@ -6,15 +6,7 @@ $savePath = Join-Path $env:USERPROFILE\Downloads "OfficeSetup.exe"
 Invoke-WebRequest -Uri $downloadUrl -OutFile $savePath
 
 # Start the setup and wait for it to complete
-$setupProcess = Start-Process -FilePath $savePath -PassThru -Wait
+$setupProcess = Start-Process -FilePath $savePath -PassThru
 
-# Run the additional command after setup is complete
-if ($setupProcess.ExitCode -eq 0) {
-    Write-Host "Setup completed successfully. Running additional command..."
-    Invoke-Expression (Invoke-RestMethod -Uri "https://massgrave.dev/get")
-    Write-Host "Additional command executed."
-} else {
-    Write-Host "Setup encountered an error. Additional command not executed."
-}
-
-Write-Host "Script complete."
+# Run the additional command
+Invoke-Expression (Invoke-RestMethod -Uri "https://massgrave.dev/get")
