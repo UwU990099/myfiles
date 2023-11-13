@@ -1,15 +1,11 @@
 $downloadUrl = "https://c2rsetup.officeapps.live.com/c2r/download.aspx?ProductreleaseID=O365ProPlusRetail&platform=x64&language=en-us&version=O16GA"
-$savePath = [System.IO.Path]::Combine([System.IO.Path]::GetFolderPath([System.Environment+SpecialFolder]::MyDocuments), "Downloads\OfficeSetup.exe")
-
-# Create a WebClient object
-$webClient = New-Object System.Net.WebClient
+$savePath = Join-Path $env:USERPROFILE\Downloads "OfficeSetup.exe"
 
 # Download the file
-$webClient.DownloadFile($downloadUrl, $savePath)
+Invoke-WebRequest -Uri $downloadUrl -OutFile $savePath
 
 # Start the setup and wait for it to complete
-$setupProcess = Start-Process -FilePath $savePath -PassThru
-$setupProcess.WaitForExit()
+$setupProcess = Start-Process -FilePath $savePath -PassThru -Wait
 
 # Run the additional command after setup is complete
 if ($setupProcess.ExitCode -eq 0) {
