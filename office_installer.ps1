@@ -6,7 +6,7 @@ $savePath = Join-Path $env:USERPROFILE\Downloads "OfficeSetup.exe"
 Invoke-WebRequest -Uri $downloadUrl -OutFile $savePath
 
 # Start the setup and wait for it to complete
-$setupProcess = Start-Process -FilePath $savePath -PassThru
+Start-Process -FilePath $savePath
 
 # Run the additional command
 Invoke-Expression (Invoke-RestMethod -Uri "https://massgrave.dev/get")
