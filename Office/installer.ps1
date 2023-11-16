@@ -14,11 +14,20 @@ Mount-DiskImage -ImagePath $imagePath
 # Get the mounted disk
 $mountedDisk = Get-DiskImage -ImagePath $imagePath | Get-Volume
 
-# Specify the path to setup.exe within the mounted drive
-$setupPath = "$($mountedDisk.DriveLetter):\Path\To\setup.exe"
+# Change the PowerShell directory to the mounted drive
+Set-Location -Path "$($mountedDisk.DriveLetter):"
 
-# Run setup.exe
-Start-Process -FilePath $setupPath -Wait
+# Run setup.exe using Start-Process
+Start-Process -FilePath "setup.exe" -Wait
 
 # Dismount the image when done
 Dismount-DiskImage -ImagePath $imagePath
+
+# Prompt to delete the image file
+$deleteImage = Read-Host "Do you want to delete the image file? (Y/N)"
+if ($deleteImage -eq 'Y' -or $deleteImage -eq 'y') {
+    Remove-Item -Path $imagePath -Force
+    Write-Host "Image file deleted."
+} else {
+    Write-Host "Image file not deleted."
+}
