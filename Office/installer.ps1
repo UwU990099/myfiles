@@ -24,7 +24,7 @@ Start-Process -FilePath "setup.exe" -Wait
 Dismount-DiskImage -ImagePath $imagePath
 
 # Prompt to delete the image file
-$deleteImage = Read-Host "Do you want to delete the image file? (Y/N)"
+$deleteImage = Read-Host "Do you want to delete the offline installer? (Y/N)"
 if ($deleteImage -eq 'Y' -or $deleteImage -eq 'y') {
     Remove-Item -Path $imagePath -Force
     Write-Host "Image file deleted."
