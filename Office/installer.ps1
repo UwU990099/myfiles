@@ -18,7 +18,7 @@ $mountedDisk = Get-DiskImage -ImagePath $imagePath | Get-Volume
 Set-Location -Path "$($mountedDisk.DriveLetter):"
 
 # Run setup.exe using Start-Process
-Start-Process -FilePath "setup.exe" -Wait
+Start-Process -FilePath "setup.exe" -wait
 
 # Dismount the image when done
 Dismount-DiskImage -ImagePath $imagePath
