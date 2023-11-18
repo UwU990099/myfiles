@@ -8,8 +8,10 @@ Start-Sleep -Seconds 2
 # Navigation in Local Group Policy Editor
 1..8 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
 [System.Windows.Forms.SendKeys]::SendWait("{RIGHT}")
+Start-Sleep -Milliseconds 500
 1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
 [System.Windows.Forms.SendKeys]::SendWait("{RIGHT}")
+Start-Sleep -Milliseconds 500
 1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
 
 # Wait for 0.5 seconds
@@ -17,11 +19,14 @@ Start-Sleep -Seconds 1
 
 [System.Windows.Forms.SendKeys]::SendWait("{TAB}")
 
+Start-Sleep -Seconds 1
+
 1..3 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
+Start-Sleep -Milliseconds 500
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 # Wait for 1 second
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 2
 
 # Tab 2 times
 1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{TAB}") }
