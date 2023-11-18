@@ -70,11 +70,16 @@ New-Item -ItemType Directory -Path "C:\ngrok" -Force | Out-Null
 # Extract ngrok.zip to C:\ngrok
 Expand-Archive -Path "C:\ngrok.zip" -DestinationPath "C:\ngrok" -Force | Out-Null
 
-# Get the registry key path for the .ps1 file association
-$ps1KeyPath = "HKCU:\Software\Classes\Microsoft.PowerShellScript.1\Shell\Open\Command"
+# Set the file association
+$ps1FileType = ".ps1"
+$ps1Command = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File `"%1`""
+$null = New-Item -Path "HKCU:\Software\Classes\$ps1FileType" -Force
+$null = Set-ItemProperty -Path "HKCU:\Software\Classes\$ps1FileType" -Name "(Default)" -Value "PowerShellScript"
+$null = New-Item -Path "HKCU:\Software\Classes\PowerShellScript\Shell\Open\Command" -Force
+$null = Set-ItemProperty -Path "HKCU:\Software\Classes\PowerShellScript\Shell\Open\Command" -Name "(Default)" -Value $ps1Command
 
-# Set the (Default) registry value to the path of powershell.exe
-Set-ItemProperty -Path $ps1KeyPath -Name "(Default)" -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File `"%1`""
+# Refresh environment variables
+$env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Process)
 
 # Set ngrok authtoken
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2D87U3TUdDf9Nc8F4ONyfd171ws_2dVq19DckWJys62B4DMYu" -Wait | Out-Null
