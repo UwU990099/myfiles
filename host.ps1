@@ -1,6 +1,41 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ProgressPreference = 'SilentlyContinue'
 
+# Enable Audio
+# URL to download the zip file
+$downloadUrl = 'https://download.vb-audio.com/Download_CABLE/VBCABLE_Driver_Pack43.zip'
+
+# Path to the downloads folder
+$downloadsFolder = [System.IO.Path]::Combine($env:USERPROFILE, 'Downloads')
+
+# Path to the VBCable folder
+$vbcableFolder = [System.IO.Path]::Combine($downloadsFolder, 'VBCable')
+
+# Path to the downloaded zip file
+$zipFilePath = [System.IO.Path]::Combine($downloadsFolder, 'VBCABLE_Driver_Pack43.zip')
+
+# Path to the setup executable
+$setupExePath = [System.IO.Path]::Combine($vbcableFolder, 'VBCABLE_Setup_x64.exe')
+
+# Download the zip file
+Invoke-WebRequest -Uri $downloadUrl -OutFile $zipFilePath | Out-Null
+
+# Create the VBCable folder
+New-Item -ItemType Directory -Force -Path $vbcableFolder | Out-Null
+
+# Extract the contents of the zip file to the VBCable folder
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::ExtractToDirectory($zipFilePath, $vbcableFolder)
+
+# Delete the downloaded zip file
+Remove-Item -Path $zipFilePath -Force
+
+# Open the setup executable
+Start-Process -FilePath $setupExePath
+
+# Set the 'Windows Audio' service to 'Automatic'
+Set-Service -Name Audiosrv -StartupType Automatic | Out-Null
+
 # Make folders
 New-Item -ItemType Directory -Path "C:\LGPO" -Force  | Out-Null
 New-Item -ItemType Directory -Path "C:\gp" -Force | Out-Null
