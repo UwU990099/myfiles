@@ -1,6 +1,35 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ProgressPreference = 'SilentlyContinue'
 
+Write-Host "Unpinning apps from start menu"
+# Unpin apps from start menu
+function Pin-App {    param(
+        [string]$appname,
+        [switch]$unpin
+    )
+    try{
+        if ($unpin.IsPresent){
+            ((New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | ?{$_.Name -eq $appname}).Verbs() | ?{$_.Name.replace('&','') -match 'Von "Start" lösen|Unpin from Start'} | %{$_.DoIt()}
+            return "App '$appname' unpinned from Start"
+        }else{
+            ((New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | ?{$_.Name -eq $appname}).Verbs() | ?{$_.Name.replace('&','') -match 'An "Start" anheften|Pin to Start'} | %{$_.DoIt()}
+            return "App '$appname' pinned to Start"
+        }
+    }catch{
+        Write-Error "Error Pinning/Unpinning App! (App-Name correct?)"
+    }
+}
+
+Pin-App "Server Manager" -unpin
+Pin-App "Windows PowerShell" -unpin
+Pin-App "Windows PowerShell ISE" -unpin
+Pin-App "Windows Administrative Tools" -unpin
+Pin-App "Task Manager" -unpin
+Pin-App "Control Panel" -unpin
+Pin-App "Remote Desktop Connection" -unpin
+Pin-App "Event Viewer" -unpin
+Pin-App "File Explorer" -unpin
+
 Write-Host "Enabling Audio"
 
 # Set the 'Windows Audio' service to 'Automatic'
