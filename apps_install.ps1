@@ -5,6 +5,9 @@ choco install internet-download-manager -y
 choco install winrar -y
 choco install telegram -y
 
+# Create LosslessCut folder
+New-Item -ItemType Directory -Path "C:\LosslessCut" -Force
+
 # Download 7z file to Downloads folder
 Invoke-WebRequest -Uri "https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-win-x64.7z" -OutFile "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z"
 
@@ -14,7 +17,7 @@ while ((Test-Path "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z.part"
 }
 
 # Extract contents using WinRAR
-& "C:\Program Files\WinRAR\WinRAR.exe" x "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z" "C:\LosslessCut"
+Start-Process -FilePath "C:\Program Files\WinRAR\WinRAR.exe" -ArgumentList "x 'C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z' 'C:\LosslessCut'" -Wait
 
 # Delete 7z file
 Remove-Item "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z" -Force
