@@ -5,29 +5,22 @@ choco install telegram -y
 
 $ProgressPreference = 'SilentlyContinue'
 
-# Define paths
-$losslessCutFolder = "C:\LosslessCut"
-$tempDir = [System.IO.Path]::GetTempPath()
-$downloadUrl = "https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-win-x64.7z"
-$downloadedFile = Join-Path $tempDir "LosslessCut-win-x64.7z"
-$winrarPath = "C:\Program Files\WinRAR\WinRAR.exe"
-$losslessCutExe = Join-Path $losslessCutFolder "LosslessCut.exe"
-$desktopShortcut = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "LosslessCut.lnk")
+# Download 7z file to Downloads folder
+Invoke-WebRequest -Uri "https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-win-x64.7z" -OutFile "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z"
 
-# Create LosslessCut folder
-New-Item -ItemType Directory -Path $losslessCutFolder -Force
-
-# Download 7z file to temp directory
-Invoke-WebRequest -Uri $downloadUrl -OutFile $downloadedFile
+# Wait for the download to complete
+while ((Test-Path "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z.part")) {
+    Start-Sleep -Seconds 1
+}
 
 # Extract contents using WinRAR
-& $winrarPath x $downloadedFile $losslessCutFolder
+& "C:\Program Files\WinRAR\WinRAR.exe" x "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z" "C:\LosslessCut"
 
 # Delete 7z file
-Remove-Item $downloadedFile -Force
+Remove-Item "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z" -Force
 
 # Create desktop shortcut
 $shell = New-Object -ComObject WScript.Shell
-$shortcut = $shell.CreateShortcut($desktopShortcut)
-$shortcut.TargetPath = $losslessCutExe
+$shortcut = $shell.CreateShortcut("C:\Users\Administrator\Desktop\LosslessCut.lnk")
+$shortcut.TargetPath = "C:\LosslessCut\LosslessCut.exe"
 $shortcut.Save()
