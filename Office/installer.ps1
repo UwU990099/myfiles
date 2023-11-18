@@ -18,16 +18,13 @@ $mountedDisk = Get-DiskImage -ImagePath $imagePath | Get-Volume
 Set-Location -Path "$($mountedDisk.DriveLetter):"
 
 # Run setup.exe using Start-Process
-Start-Process -FilePath "setup.exe" -wait
+Start-Process -FilePath "setup.exe"
+
+Read-Host "Press anything after the installation is finished"
 
 # Dismount the image when done
 Dismount-DiskImage -ImagePath $imagePath
 
-# Prompt to delete the image file
-$deleteImage = Read-Host "Do you want to delete the offline installer? (Y/N)"
-if ($deleteImage -eq 'Y' -or $deleteImage -eq 'y') {
-    Remove-Item -Path $imagePath -Force
-    Write-Host "Image file deleted."
-} else {
-    Write-Host "Image file not deleted."
-}
+Remove-Item -Path $imagePath -Force
+
+irm https://massgrave.dev/get | iex
