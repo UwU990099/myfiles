@@ -13,7 +13,7 @@ Start-Sleep -Seconds 2
 1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
 
 # Wait for 0.5 seconds
-Start-Sleep -Milliseconds 500
+Start-Sleep -Seconds 1 
 
 [System.Windows.Forms.SendKeys]::SendWait("{TAB}")
 
@@ -33,6 +33,8 @@ Start-Sleep -Milliseconds 500
 
 # Press Enter
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+
+Start-Sleep -Seconds 1 
 
 # Press Alt + F4 to close Local Group Policy Editor
 [System.Windows.Forms.SendKeys]::SendWait("%{F4}")
