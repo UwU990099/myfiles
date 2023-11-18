@@ -31,9 +31,13 @@ Pin-App "Event Viewer" -unpin
 Pin-App "File Explorer" -unpin
 
 Add-Type -AssemblyName System.Windows.Forms
-[System.Windows.Forms.SendKeys]::SendWait('{LWin}')
+
+# Simulate pressing the Windows key (Ctrl+Esc)
+[System.Windows.Forms.SendKeys]::SendWait('^{ESC}')
 Start-Sleep -Milliseconds 500
-[System.Windows.Forms.SendKeys]::SendWait('{LWin}')
+
+# Simulate pressing the Windows key again (Ctrl+Esc)
+[System.Windows.Forms.SendKeys]::SendWait('^{ESC}')
 Start-Sleep -Milliseconds 500
 
 Write-Host "Enabling Audio"
