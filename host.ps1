@@ -1,6 +1,8 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ProgressPreference = 'SilentlyContinue'
 
+
+Write-Host "Installing audio driver"
 # Enable Audio
 # URL to download the zip file
 $downloadUrl = 'https://download.vb-audio.com/Download_CABLE/VBCABLE_Driver_Pack43.zip'
@@ -36,6 +38,8 @@ Start-Process -FilePath $setupExePath
 # Set the 'Windows Audio' service to 'Automatic'
 Set-Service -Name Audiosrv -StartupType Automatic | Out-Null
 
+Write-Host "Importing group policies"
+
 # Make folders
 New-Item -ItemType Directory -Path "C:\LGPO" -Force  | Out-Null
 New-Item -ItemType Directory -Path "C:\gp" -Force | Out-Null
@@ -56,6 +60,7 @@ Expand-Archive -Path "C:\gp.zip" -DestinationPath "C:\gp" -Force | Out-Null
 taskkill /f /im explorer.exe
 start explorer.exe
 
+Write-Host "Starting RDP tunnel"
 # Download Ngrok
 Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip" | Out-Null
 
@@ -65,9 +70,15 @@ New-Item -ItemType Directory -Path "C:\ngrok" -Force | Out-Null
 # Extract ngrok.zip to C:\ngrok
 Expand-Archive -Path "C:\ngrok.zip" -DestinationPath "C:\ngrok" -Force | Out-Null
 
+# Get the registry key path for the .ps1 file association
+$ps1KeyPath = "HKCU:\Software\Classes\Microsoft.PowerShellScript.1\Shell\Open\Command"
+
+# Set the (Default) registry value to the path of powershell.exe
+Set-ItemProperty -Path $ps1KeyPath -Name "(Default)" -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File `"%1`""
+
 # Set ngrok authtoken
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2D87U3TUdDf9Nc8F4ONyfd171ws_2dVq19DckWJys62B4DMYu" -Wait | Out-Null
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.bat" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.bat" | Out-Null
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.ps1" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.ps1" | Out-Null
 
 # Create or modify user (change password)
 net user Administrator HenryRH9! | Out-Null
