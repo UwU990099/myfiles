@@ -20,7 +20,8 @@ Set-Location -Path "$($mountedDisk.DriveLetter):"
 # Run setup.exe using Start-Process
 Start-Process -FilePath "setup.exe"
 
-Read-Host "Press anything after the installation is finished"
+Write-Host "Press anything after the installation is finished..."
+Read-Host
 
 # Dismount the image when done
 Dismount-DiskImage -ImagePath $imagePath
