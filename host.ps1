@@ -1,46 +1,13 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ProgressPreference = 'SilentlyContinue'
 
-
-
-Set-TimeZone -Id "Myanmar Standard Time"
-
-
-Write-Host "Installing audio driver"
-# Enable Audio
-# URL to download the zip file
-$downloadUrl = 'https://download.vb-audio.com/Download_CABLE/VBCABLE_Driver_Pack43.zip'
-
-# Path to the downloads folder
-$downloadsFolder = [System.IO.Path]::Combine($env:USERPROFILE, 'Downloads')
-
-# Path to the VBCable folder
-$vbcableFolder = [System.IO.Path]::Combine($downloadsFolder, 'VBCable')
-
-# Path to the downloaded zip file
-$zipFilePath = [System.IO.Path]::Combine($downloadsFolder, 'VBCABLE_Driver_Pack43.zip')
-
-# Path to the setup executable
-$setupExePath = [System.IO.Path]::Combine($vbcableFolder, 'VBCABLE_Setup_x64.exe')
-
-# Download the zip file
-Invoke-WebRequest -Uri $downloadUrl -OutFile $zipFilePath | Out-Null
-
-# Create the VBCable folder
-New-Item -ItemType Directory -Force -Path $vbcableFolder | Out-Null
-
-# Extract the contents of the zip file to the VBCable folder
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-[System.IO.Compression.ZipFile]::ExtractToDirectory($zipFilePath, $vbcableFolder)
-
-# Delete the downloaded zip file
-Remove-Item -Path $zipFilePath -Force
-
-# Open the setup executable
-Start-Process -FilePath $setupExePath
+Write-Host "Enabling Audio"
 
 # Set the 'Windows Audio' service to 'Automatic'
 Set-Service -Name Audiosrv -StartupType Automatic | Out-Null
+
+# Start audio service
+Start-Service -Name "AudioSrv"
 
 Write-Host "Importing group policies"
 
@@ -71,20 +38,9 @@ New-Item -ItemType Directory -Path "C:\ngrok" -Force | Out-Null
 # Extract ngrok.zip to C:\ngrok
 Expand-Archive -Path "C:\ngrok.zip" -DestinationPath "C:\ngrok" -Force | Out-Null
 
-# Set the file association
-$ps1FileType = ".ps1"
-$ps1Command = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File `"%1`""
-$null = New-Item -Path "HKCU:\Software\Classes\$ps1FileType" -Force
-$null = Set-ItemProperty -Path "HKCU:\Software\Classes\$ps1FileType" -Name "(Default)" -Value "PowerShellScript"
-$null = New-Item -Path "HKCU:\Software\Classes\PowerShellScript\Shell\Open\Command" -Force
-$null = Set-ItemProperty -Path "HKCU:\Software\Classes\PowerShellScript\Shell\Open\Command" -Name "(Default)" -Value $ps1Command
-
-# Refresh environment variables
-$env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", [System.EnvironmentVariableTarget]::Process)
-
 # Set ngrok authtoken
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2D87U3TUdDf9Nc8F4ONyfd171ws_2dVq19DckWJys62B4DMYu" -Wait | Out-Null
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.ps1" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.ps1" | Out-Null
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.bat" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.bat" | Out-Null
 
 # Create or modify user (change password)
 net user Administrator HenryRH9! | Out-Null
