@@ -60,11 +60,8 @@ Expand-Archive -Path "C:\gp.zip" -DestinationPath "C:\gp" -Force | Out-Null
 # Import GP
 & "C:\LGPO\LGPO.exe" /g "C:\gp" > $null 2>&1
 
-# Restart Explorer
-taskkill /f /im explorer.exe
-start explorer.exe
-
 Write-Host "Starting RDP tunnel"
+
 # Download Ngrok
 Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip" | Out-Null
 
@@ -91,6 +88,10 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 
 # Create or modify user (change password)
 net user Administrator HenryRH9! | Out-Null
+
+# Restart Explorer
+taskkill /f /im explorer.exe
+start explorer.exe
 
 # Run ngrok with specified parameters
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
