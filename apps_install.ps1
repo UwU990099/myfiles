@@ -1,9 +1,9 @@
+$ProgressPreference = 'SilentlyContinue'
+
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 choco install internet-download-manager -y
 choco install winrar -y
 choco install telegram -y
-
-$ProgressPreference = 'SilentlyContinue'
 
 # Download 7z file to Downloads folder
 Invoke-WebRequest -Uri "https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-win-x64.7z" -OutFile "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z"
