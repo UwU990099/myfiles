@@ -3,6 +3,8 @@ choco install internet-download-manager -y
 choco install winrar -y
 choco install telegram -y
 
+$ProgressPreference = 'SilentlyContinue'
+
 # Define paths
 $losslessCutFolder = "C:\LosslessCut"
 $tempDir = [System.IO.Path]::GetTempPath()
