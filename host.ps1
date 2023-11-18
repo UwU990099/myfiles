@@ -84,9 +84,72 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 # Create or modify user (change password)
 net user Administrator HenryRH9! | Out-Null
 
-# Restart Explorer
-taskkill /f /im explorer.exe
-start explorer.exe
-
 # Run ngrok with specified parameters
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
+
+# Delete everything from desktop
+# Specify the path to the desktop
+$desktopPath = "Desktop"
+
+# Get all user profiles in the C:\Users\ directory
+$userProfiles = Get-ChildItem -Path "C:\Users\" -Directory
+
+# Loop through each user profile and delete files from the desktop
+foreach ($userProfile in $userProfiles) {
+    $userDesktopPath = Join-Path -Path $userProfile.FullName -ChildPath $desktopPath
+    Remove-Item -Path $userDesktopPath\* -Force
+}
+
+
+# Add this computer
+# Enable Computer (This PC) desktop icon
+$computerRegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel"
+$computerIconValueName = "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+$defaultValue = 0
+
+# Create the registry key and set the value
+New-Item -Path $computerRegistryPath -Force | Out-Null
+Set-ItemProperty -Path $computerRegistryPath -Name $computerIconValueName -Value $defaultValue
+
+# Refresh the desktop to apply changes
+Stop-Process -Name explorer -Force
+
+
+# Path to the Chrome executable
+$chromePath = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+
+# Path to the desktop and the shortcut file
+$desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath("Desktop"), "Google Chrome.lnk")
+
+# Create a WScript Shell object
+$wScriptShell = New-Object -ComObject WScript.Shell
+
+# Create the shortcut object
+$shortcut = $wScriptShell.CreateShortcut($desktopPath)
+
+# Set properties for the shortcut
+$shortcut.TargetPath = $chromePath
+$shortcut.IconLocation = "$chromePath,0"
+
+# Save the shortcut
+$shortcut.Save()
+
+# Uninstall Apps
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name='AWS Tools for Windows'" | ForEach-Object { $_.Uninstall() }
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%LibreOffice%'" | ForEach-Object { $_.Uninstall() }
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Go Programming%'" | ForEach-Object { $_.Uninstall() }
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Teams%'" | ForEach-Object { $_.Uninstall() }
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Java%'" | ForEach-Object { $_.Uninstall() }
+Start-Process -FilePath "C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\unins000.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES" -Wait
+Start-Process -FilePath C:\Ruby2*\unins000.exe -ArgumentList "/verysilent" -Wait
+Start-Process -FilePath "C:\Program Files\Git\unins000.exe" -ArgumentList "/SILENT" -Wait
+Start-Process -FilePath "C:\Program Files\R\R-3.6.3\unins000.exe" -ArgumentList "/SILENT" -Wait
+Start-Process -FilePath "C:\Program Files\Mozilla Firefox\uninstall\helper.exe" -ArgumentList "/S" -Wait
+
+# Remove folders and files
+Remove-Item -Path "C:\gp" -Recurse -Force
+Remove-Item -Path "C:\LGPO" -Recurse -Force
+Remove-Item -Path "C:\Ruby*" -Recurse -Force
+Remove-Item -Path "C:\gp.zip" -Force
+Remove-Item -Path "C:\ngrok.zip" -Force
+
