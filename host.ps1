@@ -2,6 +2,10 @@
 $ProgressPreference = 'SilentlyContinue'
 
 
+
+Set-TimeZone -Id "Myanmar Standard Time"
+
+
 Write-Host "Installing audio driver"
 # Enable Audio
 # URL to download the zip file
