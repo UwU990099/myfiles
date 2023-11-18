@@ -30,6 +30,12 @@ Pin-App "Remote Desktop Connection" -unpin
 Pin-App "Event Viewer" -unpin
 Pin-App "File Explorer" -unpin
 
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.SendKeys]::SendWait('{LWin}')
+Start-Sleep -Milliseconds 500
+[System.Windows.Forms.SendKeys]::SendWait('{LWin}')
+Start-Sleep -Milliseconds 500
+
 Write-Host "Enabling Audio"
 
 # Set the 'Windows Audio' service to 'Automatic'
