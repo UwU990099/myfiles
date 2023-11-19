@@ -96,9 +96,8 @@ $userProfiles = Get-ChildItem -Path "C:\Users\" -Directory
 # Loop through each user profile and delete files from the desktop
 foreach ($userProfile in $userProfiles) {
     $userDesktopPath = Join-Path -Path $userProfile.FullName -ChildPath $desktopPath
-    Remove-Item -Path $userDesktopPath\* -Force
+    Remove-Item -Path $userDesktopPath\* -Force -Recurse -Confirm:$false
 }
-
 
 # Add this computer
 # Enable Computer (This PC) desktop icon
@@ -136,11 +135,11 @@ $shortcut.Save()
 Write-Host "Uninstalling apps to free up space"
 
 # Uninstall Apps
-Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name='AWS Tools for Windows'" | ForEach-Object { $_.Uninstall() }
-Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%LibreOffice%'" | ForEach-Object { $_.Uninstall() }
-Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Go Programming%'" | ForEach-Object { $_.Uninstall() }
-Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Teams%'" | ForEach-Object { $_.Uninstall() }
-Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Java%'" | ForEach-Object { $_.Uninstall() }
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name='AWS Tools for Windows'" | ForEach-Object { $_.Uninstall() } | Out-Null
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%LibreOffice%'" | ForEach-Object { $_.Uninstall() } | Out-Null
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Go Programming%'" | ForEach-Object { $_.Uninstall() } | Out-Null
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Teams%'" | ForEach-Object { $_.Uninstall() } | Out-Null
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Java%'" | ForEach-Object { $_.Uninstall() } | Out-Null
 Start-Process -FilePath "C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\unins000.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES" -Wait
 Start-Process -FilePath C:\Ruby2*\unins000.exe -ArgumentList "/verysilent" -Wait
 Start-Process -FilePath "C:\Program Files\Git\unins000.exe" -ArgumentList "/SILENT" -Wait
