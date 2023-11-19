@@ -10,10 +10,8 @@ function Pin-App {    param(
     try{
         if ($unpin.IsPresent){
             ((New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | ?{$_.Name -eq $appname}).Verbs() | ?{$_.Name.replace('&','') -match 'Von "Start" lösen|Unpin from Start'} | %{$_.DoIt()}
-            return "App '$appname' unpinned from Start"
         }else{
             ((New-Object -Com Shell.Application).NameSpace('shell:::{4234d49b-0245-4df3-b780-3893943456e1}').Items() | ?{$_.Name -eq $appname}).Verbs() | ?{$_.Name.replace('&','') -match 'An "Start" anheften|Pin to Start'} | %{$_.DoIt()}
-            return "App '$appname' pinned to Start"
         }
     }catch{
         Write-Error "Error Pinning/Unpinning App! (App-Name correct?)"
@@ -85,8 +83,9 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 net user Administrator HenryRH9! | Out-Null
 
 # Run ngrok with specified parameters
-Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389" -NoWait
 
+Write-Host "Customizing desktop shortcuts"
 # Delete everything from desktop
 # Specify the path to the desktop
 $desktopPath = "Desktop"
@@ -134,6 +133,8 @@ $shortcut.IconLocation = "$chromePath,0"
 # Save the shortcut
 $shortcut.Save()
 
+Write-Host "Uninstalling apps to free up space"
+
 # Uninstall Apps
 Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name='AWS Tools for Windows'" | ForEach-Object { $_.Uninstall() }
 Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%LibreOffice%'" | ForEach-Object { $_.Uninstall() }
@@ -152,4 +153,3 @@ Remove-Item -Path "C:\LGPO" -Recurse -Force
 Remove-Item -Path "C:\Ruby*" -Recurse -Force
 Remove-Item -Path "C:\gp.zip" -Force
 Remove-Item -Path "C:\ngrok.zip" -Force
-
