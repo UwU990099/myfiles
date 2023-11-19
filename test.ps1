@@ -3,6 +3,7 @@ function Show-Menu {
     Clear-Host
     Write-Host "=============================================="
     Write-Host "      Choose an option to copy to clipboard"
+    Write-Host "             (Press X to close)"
     Write-Host "=============================================="
     Write-Host ""
     $choices.GetEnumerator() | Sort-Object Key | ForEach-Object {
@@ -32,7 +33,10 @@ if ($choices.ContainsKey($selectedChoice)) {
 
     # Pause for a moment to display the result
     Start-Sleep -Seconds 1
+
+    # Return to exit the current function
+    return
 }
 else {
-    Write-Host "Invalid input. Please enter a valid number." -ForegroundColor Red
+    Write-Host "Invalid input. Please enter a valid number or 'x' to quit." -ForegroundColor Red
 }
