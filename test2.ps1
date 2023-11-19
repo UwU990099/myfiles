@@ -34,8 +34,8 @@ if ($choices.ContainsKey($selectedChoice)) {
     # Pause for a moment to display the result
     Start-Sleep -Seconds 1
 
-    # Exit the entire script
-    Exit
+    # Return to exit the current function
+    return
 }
 else {
     Write-Host "Invalid input. Please enter a valid number or 'x' to quit." -ForegroundColor Red
