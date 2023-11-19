@@ -32,7 +32,11 @@ $scriptList = @(
     @{
         Name = "Install Apps"
         Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/apps_install.ps1"
-    }
+    },
+    @{
+        Name = "Keep RDP Alive"
+        Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/zzz.ps1"
+    }    
 )
 
 # Main loop
