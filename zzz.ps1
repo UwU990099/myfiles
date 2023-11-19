@@ -23,47 +23,10 @@ Stop-Process -Name explorer -Force
 $url1 = "https://chromewebstore.google.com/detail/auto-refresh-plus-page-mo/hgeljhfekpckiiplhkigfehkdpldcggm?pli=1"
 $url2 = "https://chromewebstore.google.com/detail/urban-vpn-proxy/eppiocemhmnlbhjplcgkofciiegomcon"
 $url3 = "https://www.coursera.org/login"
+$url4 = "https://justpaste.it/hka"
 
 # Open the URLs in Chrome
 Start-Process "chrome.exe" -ArgumentList $url1
 Start-Process "chrome.exe" -ArgumentList $url2
 Start-Process "chrome.exe" -ArgumentList $url3
-
-# Function to display the menu
-function Show-Menu {
-    Clear-Host
-    Write-Host "=============================================="
-    Write-Host "      Choose an option to copy to clipboard"
-    Write-Host "=============================================="
-    Write-Host ""
-    $choices.GetEnumerator() | Sort-Object Key | ForEach-Object {
-        Write-Host ("{0,3}. {1,-30}" -f $_.Key, $_.Value) -ForegroundColor Green
-    }
-}
-
-# List of choices
-$choices = @{
-    1 = "ycxumqz@hldrive.com"
-    2 = "woraw97154@eazenity.com"
-}
-
-# Display the menu
-Show-Menu
-
-# Get user input without requiring Enter
-$choice = $host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-
-# Validate user input
-$selectedChoice = [int]::Parse($choice.Character.ToString())
-if ($choices.ContainsKey($selectedChoice)) {
-    # Copy the selected text to the clipboard
-    $choices[$selectedChoice] | Set-Clipboard
-
-    Write-Host "Text '$($choices[$selectedChoice])' copied to the clipboard."
-
-    # Pause for a moment to display the result
-    Start-Sleep -Seconds 1
-}
-else {
-    Write-Host "Invalid input. Please enter a valid number." -ForegroundColor Red
-}
+Start-Process "chrome.exe" -ArgumentList $url4
