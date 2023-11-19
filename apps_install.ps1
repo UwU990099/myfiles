@@ -17,13 +17,17 @@ while ((Test-Path "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z.part"
 }
 
 # Extract contents using WinRAR
-$winrarProcess = Start-Process -FilePath "C:\Program Files\WinRAR\WinRAR.exe" -ArgumentList "x", "`"C:\Users\Henry\Downloads\LosslessCut-win-x64.7z`"", "`"C:\LosslessCut`"" -PassThru
+$winrarProcess = Start-Process -FilePath "C:\Program Files\WinRAR\WinRAR.exe" -ArgumentList "x", "`"C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z`"", "`"C:\LosslessCut`"" -PassThru
 
 # Wait for the WinRAR process to finish
 while (!$winrarProcess.HasExited) {
     Start-Sleep -Seconds 1
 }
 
+Write-Host "Extraction completed."
+
+
+write-host "done"
 # Delete 7z file
 Remove-Item "C:\Users\Administrator\Downloads\LosslessCut-win-x64.7z" -Force
 
