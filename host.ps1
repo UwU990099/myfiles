@@ -144,7 +144,6 @@ Start-Process -FilePath "C:\Users\Administrator\AppData\Local\Programs\Microsoft
 Start-Process -FilePath C:\Ruby2*\unins000.exe -ArgumentList "/verysilent" -Wait
 Start-Process -FilePath "C:\Program Files\Git\unins000.exe" -ArgumentList "/SILENT" -Wait
 Start-Process -FilePath "C:\Program Files\R\R-3.6.3\unins000.exe" -ArgumentList "/SILENT" -Wait
-Start-Process -FilePath "C:\Program Files\Mozilla Firefox\uninstall\helper.exe" -ArgumentList "/S" -Wait
 
 # Remove folders and files
 Remove-Item -Path "C:\gp" -Recurse -Force
