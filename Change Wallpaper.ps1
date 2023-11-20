@@ -1,17 +1,8 @@
 # Step 1: Open Local Group Policy Editor
 Start-Process "gpedit.msc"
 
-# Wait for the MMC process to launch
-Add-Type -AssemblyName System.Windows.Forms
-
-# Check if the process is running
-while (-not (Get-Process "mmc" -ErrorAction SilentlyContinue)) {
-    Start-Sleep -Milliseconds 500
-}
-
 # Wait for the Local Group Policy Editor to launch
-Add-Type -AssemblyName System.Windows.Forms
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 5
 
 # Navigation in Local Group Policy Editor
 1..8 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
