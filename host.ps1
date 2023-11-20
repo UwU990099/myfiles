@@ -83,7 +83,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 net user Administrator HenryRH9! | Out-Null
 
 # Run ngrok with specified parameters
-& "C:\ngrok\ngrok.exe" "tcp" "--region" "ap" "3389"
+Start-Process -FilePath "D:\Softwares\Ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
 
 Write-Host "Customizing desktop shortcuts"
 # Delete everything from desktop
@@ -98,6 +98,8 @@ foreach ($userProfile in $userProfiles) {
     $userDesktopPath = Join-Path -Path $userProfile.FullName -ChildPath $desktopPath
     Remove-Item -Path $userDesktopPath\* -Force -Recurse -Confirm:$false
 }
+
+Clear-RecycleBin -Force | Out-Null
 
 # Add this computer
 # Enable Computer (This PC) desktop icon
