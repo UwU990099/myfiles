@@ -46,7 +46,7 @@ Set-Service -Name Audiosrv -StartupType Automatic | Out-Null
 # Start audio service
 Start-Service -Name "AudioSrv"
 
-Write-Host "Importing group policies"
+Write-Host "Enabling taskbar icons"
 
 # Make folders
 New-Item -ItemType Directory -Path "C:\LGPO" -Force  | Out-Null
