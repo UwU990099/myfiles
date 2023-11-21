@@ -21,3 +21,31 @@ foreach ($file in $response) {
 
     Invoke-WebRequest -Uri $fileUrl -OutFile $outputPath
 }
+
+Start-Sleep -Seconds 1
+
+
+Add-Type -AssemblyName System.Windows.Forms
+
+# Open personalize settings
+Start-Process "ms-settings:personalization-background"
+
+# Wait for the window to open (adjust the sleep duration if needed)
+Start-Sleep -Seconds 2
+
+# Send keys
+[System.Windows.Forms.SendKeys]::SendWait("{TAB 2}")
+Start-Sleep -Milliseconds 500
+[System.Windows.Forms.SendKeys]::SendWait("{DOWN 2}")
+Start-Sleep -Milliseconds 500
+[System.Windows.Forms.SendKeys]::SendWait("{TAB 3}")
+Start-Sleep -Milliseconds 500
+[System.Windows.Forms.SendKeys]::SendWait("{UP}")
+Start-Sleep -Milliseconds 500
+[System.Windows.Forms.SendKeys]::SendWait("{TAB}")
+Start-Sleep -Milliseconds 500
+[System.Windows.Forms.SendKeys]::SendWait(" ")
+Start-Sleep -Milliseconds 500
+
+# Alt + F4
+[System.Windows.Forms.SendKeys]::SendWait("%{F4}")
