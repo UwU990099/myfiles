@@ -138,7 +138,7 @@ Write-Host "Uninstalling apps to free up space"
 
 # Uninstall Apps
 # Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name='AWS Tools for Windows'" | ForEach-Object { $_.Uninstall() } | Out-Null
-Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%LibreOffice%'" | ForEach-Object { $_.Uninstall() } | Out-Null
+# Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%LibreOffice%'" | ForEach-Object { $_.Uninstall() } | Out-Null
 Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Go Programming%'" | ForEach-Object { $_.Uninstall() } | Out-Null
 Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Teams%'" | ForEach-Object { $_.Uninstall() } | Out-Null
 Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Java%'" | ForEach-Object { $_.Uninstall() } | Out-Null
