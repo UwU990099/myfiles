@@ -1,7 +1,7 @@
 $ProgressPreference = 'SilentlyContinue'
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-choco install internet-download-manager -y
+choco install internet-download-manager -y --ignore-checksums
 Start-Process "C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
 choco install winrar -y
 choco install telegram -y
@@ -37,3 +37,14 @@ $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut("C:\Users\Administrator\Desktop\LosslessCut.lnk")
 $shortcut.TargetPath = "C:\LosslessCut\LosslessCut.exe"
 $shortcut.Save()
+
+Write-Host "Uninstalling some apps to free up space..."
+
+# Uninstall Apps
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name='AWS Tools for Windows'" | ForEach-Object { $_.Uninstall() } | Out-Null
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%LibreOffice%'" | ForEach-Object { $_.Uninstall() } | Out-Null
+Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name LIKE '%Go Programming%'" | ForEach-Object { $_.Uninstall() } | Out-Null
+Start-Process -FilePath "C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\unins000.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES" -Wait
+Start-Process -FilePath C:\Ruby2*\unins000.exe -ArgumentList "/verysilent" -Wait
+Start-Process -FilePath "C:\Program Files\Git\unins000.exe" -ArgumentList "/SILENT" -Wait
+Start-Process -FilePath "C:\Program Files\R\R-3.6.3\unins000.exe" -ArgumentList "/SILENT" -Wait
