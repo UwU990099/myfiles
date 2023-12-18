@@ -2,8 +2,16 @@
 $ProgressPreference = 'SilentlyContinue'
 
 Write-Host "Downloading offline installer"
-# Download setup with -OutFile and different Proxy settings
-Invoke-WebRequest -Uri "https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/O365ProPlusRetail.img" -OutFile "C:\Users\Administrator\Downloads\O365ProPlusRetail.img" -Proxy ([System.Net.WebRequest]::DefaultWebProxy) -UseBasicParsing
+
+# Create a WebClient object
+$webClient = New-Object System.Net.WebClient
+
+# Set the proxy for the WebClient
+$webClient.Proxy = [System.Net.WebRequest]::DefaultWebProxy
+$webClient.Proxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials
+
+# Download setup with -OutFile
+$webClient.DownloadFile("https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/O365ProPlusRetail.img", "C:\Users\Administrator\Downloads\O365ProPlusRetail.img")
 
 # Check if the file exists
 $imagePath = "C:\Users\Administrator\Downloads\O365ProPlusRetail.img"
