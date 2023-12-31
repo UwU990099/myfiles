@@ -101,6 +101,8 @@ foreach ($userProfile in $userProfiles) {
 
 Clear-RecycleBin -Force | Out-Null
 
+SystemPropertiesPerformance.exe
+
 # Add this computer
 # Enable Computer (This PC) desktop icon
 $computerRegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel"
