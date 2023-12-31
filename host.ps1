@@ -137,13 +137,10 @@ $shortcut.IconLocation = "$chromePath,0"
 $shortcut.Save()
 
 # Remove folders and files
-Remove-Item -Path "C:\gp" -Recurse -Force -Wait
-Remove-Item -Path "C:\LGPO" -Recurse -Force -Wait
-Remove-Item -Path "C:\Ruby*" -Recurse -Force -Wait
-Remove-Item -Path "C:\gp.zip" -Force -Wait
-Remove-Item -Path "C:\ngrok.zip" -Force -Wait
-
-# Refresh the desktop to apply changes
-Stop-Process -Name explorer -Force
+Remove-Item -Path "C:\gp" -Recurse -Force 
+Remove-Item -Path "C:\LGPO" -Recurse -Force 
+Remove-Item -Path "C:\Ruby*" -Recurse -Force 
+Remove-Item -Path "C:\gp.zip" -Force 
+Remove-Item -Path "C:\ngrok.zip" -Force 
 
 Start-Sleep -Seconds 1
