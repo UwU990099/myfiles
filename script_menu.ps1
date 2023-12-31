@@ -30,6 +30,10 @@ $scriptList = @(
         Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/Office/installer.ps1"
     },
     @{
+        Name = "Install Office 365 - Option 2"
+        Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/Office/option2.ps1"
+    },
+    @{
         Name = "Install Apps"
         Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/apps_install.ps1"
     },
