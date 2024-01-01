@@ -21,6 +21,14 @@ $scriptList = @(
         Name = "Start RDP"
         Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/host.ps1"
     },
+        @{
+        Name = "Install Apps"
+        Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/apps_install.ps1"
+    },
+    @{
+        Name = "Keep RDP Alive"
+        Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/zzz.ps1"
+    },
     @{
         Name = "Change Wallpaper"
         Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/Change%20Wallpaper.ps1"
@@ -28,19 +36,7 @@ $scriptList = @(
     @{
         Name = "Install Office 365"
         Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/Office/installer.ps1"
-    },
-    @{
-        Name = "Install Office 365 - Option 2"
-        Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/Office/option2.ps1"
-    },
-    @{
-        Name = "Install Apps"
-        Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/apps_install.ps1"
-    },
-    @{
-        Name = "Keep RDP Alive"
-        Url = "https://raw.githubusercontent.com/UwU990099/myfiles/main/zzz.ps1"
-    }    
+    }
 )
 
 # Main loop
