@@ -3,6 +3,12 @@ $ProgressPreference = 'SilentlyContinue'
 
 (Get-ItemProperty -path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome').version | ForEach-Object {& ${env:ProgramFiles(x86)}\Google\Chrome\Application\$_\Installer\setup.exe --uninstall --multi-install --chrome --system-level --force-uninstall}
 
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+md -Path $env:temp\edgeinstall -erroraction SilentlyContinue | Out-Null
+$Download = join-path $env:temp\edgeinstall MicrosoftEdgeEnterpriseX64.msi
+Invoke-WebRequest 'http://go.microsoft.com/fwlink/?LinkID=2093437'  -OutFile $Download
+Start-Process "$Download" -ArgumentList "/quiet"
+
 Write-Host "Unpinning apps from start menu"
 # Unpin apps from start menu
 function Pin-App {    param(
