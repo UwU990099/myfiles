@@ -90,8 +90,8 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 # Create or modify user (change password)
 net user Administrator HenryRH9! | Out-Null
 
-# Run ngrok with specified parameters
-Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389" -NoNewWindow
+
 
 Write-Host "Customizing desktop shortcuts"
 # Delete everything from desktop
