@@ -9,6 +9,7 @@ choco install telegram -y
 Invoke-WebRequest -Uri "https://cloudfalls.vercel.app/api/raw/?path=/Softwares/ClipboardZanager.Appx" -OutFile "C:\Users\Administrator\Downloads\ClipboardZanager.Appx"
 Add-AppxPackage -Path "C:\Users\Administrator\Downloads\ClipboardZanager.Appx"
 Start-Process -FilePath "shell:AppsFolder\64360VelerSoftware.9606A2D6F057_j80j2txgjg9dj!App"
+rm "C:\Users\Administrator\Downloads\ClipboardZanager.Appx" -force
 
 
 # Create LosslessCut folder
