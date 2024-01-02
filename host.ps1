@@ -123,6 +123,9 @@ $defaultValue = 0
 New-Item -Path $computerRegistryPath -Force | Out-Null
 Set-ItemProperty -Path $computerRegistryPath -Name $computerIconValueName -Value $defaultValue
 
+
+rm "C:\Users\Administrator\Desktop\Microsoft Edge.lnk"
+
 # Refresh the desktop to apply changes
 Stop-Process -Name explorer -Force
 
