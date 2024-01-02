@@ -6,6 +6,11 @@ Start-Process "C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
 choco install winrar -y
 choco install telegram -y
 
+Invoke-WebRequest -Uri "https://cloudfalls.vercel.app/api/raw/?path=/Softwares/ClipboardZanager.Appx" -OutFile "C:\Users\Administrator\Downloads\ClipboardZanager.Appx"
+Add-AppxPackage -Path "C:\Users\Administrator\Downloads\ClipboardZanager.Appx"
+Start-Process -FilePath "shell:AppsFolder\64360VelerSoftware.9606A2D6F057_j80j2txgjg9dj!App"
+
+
 # Create LosslessCut folder
 New-Item -ItemType Directory -Path "C:\LosslessCut" -Force
 
