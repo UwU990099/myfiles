@@ -93,7 +93,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 net user Administrator HenryRH9! | Out-Null
 
 # Run ngrok with specified parameters and hide the window
-Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389" -WindowStyle Hidden
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
 
 
 Write-Host "Customizing desktop shortcuts"
