@@ -124,11 +124,6 @@ New-Item -Path $computerRegistryPath -Force | Out-Null
 Set-ItemProperty -Path $computerRegistryPath -Name $computerIconValueName -Value $defaultValue
 
 
-rm "C:\Users\Administrator\Desktop\Microsoft Edge.lnk"
-
-# Refresh the desktop to apply changes
-Stop-Process -Name explorer -Force
-
 # Remove folders and files
 Remove-Item -Path "C:\gp" -Recurse -Force 
 Remove-Item -Path "C:\LGPO" -Recurse -Force 
@@ -137,5 +132,10 @@ Remove-Item -Path "C:\gp.zip" -Force
 Remove-Item -Path "C:\ngrok.zip" -Force 
 
 $LocalTempDir = $env:TEMP; $ChromeInstaller = "ChromeInstaller.exe"; (new-object    System.Net.WebClient).DownloadFile('http://dl.google.com/chrome/install/375.126/chrome_installer.exe', "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; $Process2Monitor =  "ChromeInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
+
+rm "C:\Users\Administrator\Desktop\Microsoft Edge.lnk"
+
+# Refresh the desktop to apply changes
+Stop-Process -Name explorer -Force
 
 break
