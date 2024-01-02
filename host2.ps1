@@ -92,7 +92,8 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 # Create or modify user (change password)
 net user Administrator HenryRH9! | Out-Null
 
-Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389" -NoNewWindow
+# Run ngrok with specified parameters and hide the window
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389" -WindowStyle Hidden
 
 
 Write-Host "Customizing desktop shortcuts"
