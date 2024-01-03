@@ -25,7 +25,8 @@ Start-Sleep -Milliseconds 500
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 # Wait for 1 second
-Start-Sleep -Seconds 2
+Write-Host "Press anything to continue..."
+Read-Host
 
 # Tab 2 times
 1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{TAB}") }
@@ -74,54 +75,9 @@ foreach ($file in $response) {
 
 Start-Sleep -Seconds 1
 
-
-Add-Type -AssemblyName System.Windows.Forms
+# Restart Explorer
+Stop-Process -Name explorer -Force
 
 # Open personalize settings
 Start-Process "ms-settings:personalization-background"
 
-# Wait for the window to open (adjust the sleep duration if needed)
-Start-Sleep -Seconds 2
-
-# Send keys
-[System.Windows.Forms.SendKeys]::SendWait("{TAB 2}")
-Start-Sleep -Milliseconds 500
-[System.Windows.Forms.SendKeys]::SendWait("{DOWN 2}")
-Start-Sleep -Milliseconds 500
-[System.Windows.Forms.SendKeys]::SendWait("{TAB 3}")
-Start-Sleep -Milliseconds 500
-[System.Windows.Forms.SendKeys]::SendWait("{UP}")
-Start-Sleep -Milliseconds 500
-[System.Windows.Forms.SendKeys]::SendWait("{TAB}")
-Start-Sleep -Milliseconds 500
-[System.Windows.Forms.SendKeys]::SendWait(" ")
-Start-Sleep -Milliseconds 500
-
-# Alt + F4
-[System.Windows.Forms.SendKeys]::SendWait("%{F4}")
-
-
-
-
-
-
-
-# Specify the path to the default Windows 10 wallpaper
-# $wallpaperPath = "C:\Windows\Web\Wallpaper\Windows\img0.jpg"
-
-
-# Set the wallpaper using the SystemParametersInfo function
-# Add-Type -TypeDefinition @"
-#    using System;
-#    using System.Runtime.InteropServices;
-#
-#    public class Wallpaper {
-#        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-#        public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-#    }
-# "@
-
-# [Wallpaper]::SystemParametersInfo(0x0014, 0, $wallpaperPath, 0x01)
-
-# Restart Explorer
-Stop-Process -Name explorer -Force
