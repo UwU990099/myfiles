@@ -13,6 +13,12 @@ Add-AppxPackage -Path "C:\Users\Administrator\Downloads\ClipboardZanager.Appx"
 Start-Process -FilePath "shell:AppsFolder\64360VelerSoftware.9606A2D6F057_j80j2txgjg9dj!App"
 rm "C:\Users\Administrator\Downloads\ClipboardZanager.Appx" -force
 
+# Installing WizTree
+Invoke-WebRequest -Uri "https://diskanalyzer.com/files/wiztree_4_16_setup.exe" -OutFile "C:\Users\Administrator\Downloads\wiztree_4_16_setup.exe"
+Start-Process -FilePath "C:\Users\Administrator\Downloads\wiztree_4_16_setup.exe" -ArgumentList "/Silent" -Wait
+rm "C:\Users\Administrator\Downloads\wiztree_4_16_setup.exe" -Force
+rm "C:\Users\Administrator\Desktop\WizTree.lnk" -Force
+
 # Installing MacroRecorder
 Invoke-WebRequest -Uri "https://static.jitbit.com/mr/MacroRecorderSetup.exe" -OutFile "C:\Users\Administrator\Downloads\MacroRecorderSetup.exe"
 Start-Process -FilePath "C:\Users\Administrator\Downloads\MacroRecorderSetup.exe" -ArgumentList "/Silent" -Wait
