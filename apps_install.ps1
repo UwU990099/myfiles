@@ -12,6 +12,10 @@ Start-Process -FilePath "shell:AppsFolder\64360VelerSoftware.9606A2D6F057_j80j2t
 rm "C:\Users\Administrator\Downloads\ClipboardZanager.Appx" -force
 
 
+Invoke-WebRequest -Uri "https://static.jitbit.com/mr/MacroRecorderSetup.exe" -OutFile "C:\Users\Administrator\Downloads\MacroRecorderSetup.exe"
+
+
+
 # Create LosslessCut folder
 New-Item -ItemType Directory -Path "C:\LosslessCut" -Force
 
