@@ -48,6 +48,15 @@ Start-Sleep -Milliseconds 500
 [System.Windows.Forms.SendKeys]::SendWait('^{ESC}')
 Start-Sleep -Milliseconds 500
 
+Write-Host "Freeing up space"
+Remove-Item -Path "C:\Program Files\RStudio" -Recurse -Force
+Remove-Item -Path "C:\Program Files\LibreOffice" -Recurse -Force
+Remove-Item -Path "C:\Users\Administrator\AppData\Local\Programs" -Recurse -Force
+Remove-Item -Path "C:\Users\Administrator\AppData\Local\GitHubDesktop" -Recurse -Force
+
+Start-Process -FilePath "C:\Program Files\R\R-3.6.3\unins000.exe" -ArgumentList "/Silent"
+Start-Process -FilePath "C:\Program Files\Git\unins000.exe" -ArgumentList "/Silent"
+
 Write-Host "Enabling Audio"
 
 # Set the 'Windows Audio' service to 'Automatic'
