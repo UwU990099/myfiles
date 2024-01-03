@@ -25,8 +25,8 @@ Start-Sleep -Milliseconds 500
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
 # Wait for 1 second
-Write-Host "Press anything to continue..."
-Read-Host
+# Write-Host "Press anything to continue..."
+# Read-Host
 
 # Tab 2 times
 1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{TAB}") }
@@ -74,6 +74,9 @@ foreach ($file in $response) {
 }
 
 Start-Sleep -Seconds 1
+
+Write-Host "Press anything to continue..."
+Read-Host
 
 # Restart Explorer
 Stop-Process -Name explorer -Force
