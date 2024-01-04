@@ -31,6 +31,12 @@ Unpin-Apps -startMenuPath "$env:APPDATA\Microsoft\Windows\Start Menu"
 # Unpin apps from the all users' Start menu
 Unpin-Apps -startMenuPath "$env:ProgramData\Microsoft\Windows\Start Menu"
 
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.SendKeys]::SendWait('^{ESC}')
+Start-Sleep -Milliseconds 500
+[System.Windows.Forms.SendKeys]::SendWait('^{ESC}')
+Start-Sleep -Milliseconds 500
+
 # Enabling Audio
 Write-Host "Enabling Audio"
 Set-Service -Name Audiosrv -StartupType Automatic | Out-Null
