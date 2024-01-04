@@ -5,37 +5,6 @@ $ProgressPreference = 'SilentlyContinue'
 # Disabling Defender Real-Time
 Set-MpPreference -DisableRealtimeMonitoring $true
 
-# Function to unpin apps from the Start menu
-function Unpin-Apps {
-    param (
-        [string]$startMenuPath
-    )
-
-    # Get a list of all the shortcut files in the Start menu
-    $shortcuts = Get-ChildItem -Path $startMenuPath -Recurse -Filter *.lnk
-
-    foreach ($shortcut in $shortcuts) {
-        try {
-            # Remove the shortcut to unpin it
-            Remove-Item -Path $shortcut.FullName -Force
-            Write-Host "Unpinned $($shortcut.FullName)"
-        } catch {
-            Write-Host "Error unpinning $($shortcut.FullName): $_"
-        }
-    }
-}
-
-# Unpin apps from the current user's Start menu
-Unpin-Apps -startMenuPath "$env:APPDATA\Microsoft\Windows\Start Menu"
-
-# Unpin apps from the all users' Start menu
-Unpin-Apps -startMenuPath "$env:ProgramData\Microsoft\Windows\Start Menu"
-
-Add-Type -AssemblyName System.Windows.Forms
-[System.Windows.Forms.SendKeys]::SendWait('^{ESC}')
-Start-Sleep -Milliseconds 500
-[System.Windows.Forms.SendKeys]::SendWait('^{ESC}')
-Start-Sleep -Milliseconds 500
 
 # Enabling Audio
 Write-Host "Enabling Audio"
