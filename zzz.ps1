@@ -17,13 +17,13 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 Stop-Process -Name explorer -Force
 
 # Open the URLs
-$url1 = "https://microsoftedge.microsoft.com/addons/detail/urban-vpn-proxy/nimlmejbmnecnaghgmbahmbaddhjbecg"
-$url2 = "https://microsoftedge.microsoft.com/addons/detail/auto-refresh-plus-page-/oiecibnnapjeijccpmhonpooadjpcmnk"
+$url1 = "https://chromewebstore.google.com/detail/urban-vpn-proxy/eppiocemhmnlbhjplcgkofciiegomcon"
+$url2 = "https://chromewebstore.google.com/detail/auto-refresh-plus-page-mo/hgeljhfekpckiiplhkigfehkdpldcggm"
 $url3 = "https://www.coursera.org/login"
 $url4 = "https://justpaste.it/hka"
 
 # Open the URLs in Chrome
-Start-Process "msedge.exe" -ArgumentList $url1
-Start-Process "msedge.exe" -ArgumentList $url2
-Start-Process "msedge.exe" -ArgumentList $url3
-Start-Process "msedge.exe" -ArgumentList $url4
+Start-Process "chrome.exe" -ArgumentList $url1
+Start-Process "chrome.exe" -ArgumentList $url2
+Start-Process "chrome.exe" -ArgumentList $url3
+Start-Process "chrome.exe" -ArgumentList $url4
