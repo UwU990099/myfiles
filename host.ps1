@@ -2,17 +2,17 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ProgressPreference = 'SilentlyContinue'
 
-# (Get-ItemProperty -path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome').version | ForEach-Object {& ${env:ProgramFiles(x86)}\Google\Chrome\Application\$_\Installer\setup.exe --uninstall --multi-install --chrome --system-level --force-uninstall}
+(Get-ItemProperty -path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome').version | ForEach-Object {& ${env:ProgramFiles(x86)}\Google\Chrome\Application\$_\Installer\setup.exe --uninstall --multi-install --chrome --system-level --force-uninstall}
 
 # Installing Edge
-[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
-md -Path $env:temp\edgeinstall -erroraction SilentlyContinue | Out-Null
-$Download = join-path $env:temp\edgeinstall MicrosoftEdgeEnterpriseX64.msi
-Invoke-WebRequest 'http://go.microsoft.com/fwlink/?LinkID=2093437'  -OutFile $Download
-Start-Process "$Download" -ArgumentList "/quiet"
+# [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
+# md -Path $env:temp\edgeinstall -erroraction SilentlyContinue | Out-Null
+# $Download = join-path $env:temp\edgeinstall MicrosoftEdgeEnterpriseX64.msi
+# Invoke-WebRequest 'http://go.microsoft.com/fwlink/?LinkID=2093437'  -OutFile $Download
+# Start-Process "$Download" -ArgumentList "/quiet"
 
 # Disabling Defender Real-Time
-Set-MpPreference -DisableRealtimeMonitoring $true
+# Set-MpPreference -DisableRealtimeMonitoring $true
 
 # Unpin apps from start menu
 Write-Host "Unpinning apps from start menu"
@@ -107,7 +107,7 @@ Remove-Item -Path "C:\Ruby*" -Recurse -Force
 Remove-Item -Path "C:\gp.zip" -Force 
 Remove-Item -Path "C:\ngrok.zip" -Force 
 
-# $LocalTempDir = $env:TEMP; $ChromeInstaller = "ChromeInstaller.exe"; (new-object    System.Net.WebClient).DownloadFile('http://dl.google.com/chrome/install/375.126/chrome_installer.exe', "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; $Process2Monitor =  "ChromeInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
+$LocalTempDir = $env:TEMP; $ChromeInstaller = "ChromeInstaller.exe"; (new-object    System.Net.WebClient).DownloadFile('http://dl.google.com/chrome/install/375.126/chrome_installer.exe', "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; $Process2Monitor =  "ChromeInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
 
 # Refresh the desktop to apply changes
 Stop-Process -Name explorer -Force
