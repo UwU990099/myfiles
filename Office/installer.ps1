@@ -11,11 +11,12 @@ $webClient.Proxy = [System.Net.WebRequest]::DefaultWebProxy
 $webClient.Proxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials
 
 # Download setup with -OutFile
-$webClient.DownloadFile("https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/O365ProPlusRetail.img", "C:\Users\$env:USERPROFILE\Downloads\O365ProPlusRetail.img")
+$downloadPath = Join-Path $env:USERPROFILE 'Downloads\O365ProPlusRetail.img'
+$webClient.DownloadFile("https://officecdn.microsoft.com/db/492350f6-3a01-4f97-b9c0-c7c6ddf67d60/media/en-us/O365ProPlusRetail.img", $downloadPath)
+
 
 # Check if the file exists
-$imagePath = "C:\Users\$env:USERPROFILE\Downloads\O365ProPlusRetail.img"
-if (Test-Path $imagePath) {
+if (Test-Path $downloadPath) {
     Write-Host "Download successful. Proceeding with the installation."
 
     # Mount the image
