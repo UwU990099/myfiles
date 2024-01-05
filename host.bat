@@ -27,7 +27,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main
 New-Item -ItemType Directory -Path "C:\ngrok" -Force | Out-Null
 Expand-Archive -Path "C:\ngrok.zip" -DestinationPath "C:\ngrok" -Force | Out-Null
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2aT33hJD0ZrQ8Yq6YwlmxLBEszF_6QXAJiT84FURe7hdMKMDe" -Wait | Out-Null
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.bat" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.bat" | Out-Null
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.bat" -OutFile "C:\Users\localadmin\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.bat" | Out-Null
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
 Remove-Item -Path "C:\ngrok.zip" -Force 
 
