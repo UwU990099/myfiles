@@ -15,10 +15,6 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ProgressPreference = 'SilentlyContinue'
 
-# Disabling Defender Real-Time
-Set-MpPreference -DisableRealtimeMonitoring $true
-
-
 # Enabling Audio
 Write-Host "Enabling Audio"
 Set-Service -Name Audiosrv -StartupType Automatic | Out-Null
@@ -27,7 +23,7 @@ Start-Service -Name "AudioSrv"
 
 # Starting RDP tunnel
 Write-Host "Starting RDP tunnel"
-Invoke-WebRequest -Uri "https://cloudfalls.vercel.app/api/raw/?path=/Downloads/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip" | Out-Null
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip" | Out-Null
 New-Item -ItemType Directory -Path "C:\ngrok" -Force | Out-Null
 Expand-Archive -Path "C:\ngrok.zip" -DestinationPath "C:\ngrok" -Force | Out-Null
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2aT33hJD0ZrQ8Yq6YwlmxLBEszF_6QXAJiT84FURe7hdMKMDe" -Wait | Out-Null
@@ -66,13 +62,13 @@ choco install winrar -y
 choco install telegram -y
 
 # Installing ClipboardZanager
-Invoke-WebRequest -Uri "https://cloudfalls.vercel.app/api/raw/?path=/Softwares/ClipboardZanager.Appx" -OutFile "C:\Users\localadmin\Downloads\ClipboardZanager.Appx"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ClipboardZanager.Appx" -OutFile "C:\Users\localadmin\Downloads\ClipboardZanager.Appx"
 Add-AppxPackage -Path "C:\Users\localadmin\Downloads\ClipboardZanager.Appx"
 Start-Process -FilePath "shell:AppsFolder\64360VelerSoftware.9606A2D6F057_j80j2txgjg9dj!App"
 rm "C:\Users\localadmin\Downloads\ClipboardZanager.Appx" -force
 
 # Installing MacroRecorder
-Invoke-WebRequest -Uri "https://cloudfalls.vercel.app/api/raw/?path=/Downloads/MacroRecorderSetup.exe" -OutFile "C:\Users\localadmin\Downloads\MacroRecorderSetup.exe"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/MacroRecorderSetup.exe" -OutFile "C:\Users\localadmin\Downloads\MacroRecorderSetup.exe"
 Start-Process -FilePath "C:\Users\localadmin\Downloads\MacroRecorderSetup.exe" -ArgumentList "/Silent" -Wait
 rm "C:\Users\localadmin\Downloads\MacroRecorderSetup.exe" -force
 
