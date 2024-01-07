@@ -3,6 +3,7 @@ Start-Process "gpedit.msc"
 
 # Wait for the Local Group Policy Editor to launch
 Start-Sleep -Seconds 5
+Add-Type -AssemblyName System.Windows.Forms
 
 # Navigation in Local Group Policy Editor
 1..8 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
@@ -24,28 +25,28 @@ Start-Sleep -Seconds 1
 Start-Sleep -Milliseconds 500
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
-# Wait for 1 second
-# Write-Host "Press anything to continue..."
-# Read-Host
+Write-Host "Press anything to continue..."
+Read-Host
+
 
 # Tab 2 times
-1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{TAB}") }
+# 1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{TAB}") }
 
-Start-Sleep -Milliseconds 500
+# Start-Sleep -Milliseconds 500
 
 # Press Up arrow key
-[System.Windows.Forms.SendKeys]::SendWait("{UP}")
+# [System.Windows.Forms.SendKeys]::SendWait("{UP}")
 
 # Press Enter
-[System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+# [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
 
-Start-Sleep -Seconds 1 
+# Start-Sleep -Seconds 1 
 
 # Press Alt + F4 to close Local Group Policy Editor
-[System.Windows.Forms.SendKeys]::SendWait("%{F4}")
+# [System.Windows.Forms.SendKeys]::SendWait("%{F4}")
 
 # Wait for 2 second
-Start-Sleep -Seconds 2
+# Start-Sleep -Seconds 2
 
 # Change wallpaper
 
@@ -80,6 +81,8 @@ Read-Host
 
 # Restart Explorer
 Stop-Process -Name explorer -Force
+
+Start-Sleep -Seconds 2
 
 # Open personalize settings
 Start-Process "ms-settings:personalization-background"
