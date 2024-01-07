@@ -40,3 +40,5 @@ $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut("C:\Users\$currentUsername\Desktop\LosslessCut.lnk")
 $shortcut.TargetPath = "C:\LosslessCut\LosslessCut.exe"
 $shortcut.Save()
+
+Start-Process "C:\Program Files (x86)\Internet Download Manager\IDMan.exe"
