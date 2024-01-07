@@ -65,11 +65,14 @@ $uri += "?ref=$branch"
 # Make a request to the GitHub API to get the list of files in the folder
 $response = Invoke-RestMethod -Uri $uri -Method Get
 
+# Get the current logged-in username
+$currentUsername = $env:USERNAME
+
 # Loop through each file in the response and download it
 foreach ($file in $response) {
     $fileUrl = $file.download_url
     $fileName = $file.name
-    $outputPath = "C:\Users\Administrator\Pictures\$fileName"  # Specify your desired download location
+    $outputPath = "C:\Users\$currentUsername\Pictures\$fileName"  # Specify your desired download location
 
     Invoke-WebRequest -Uri $fileUrl -OutFile $outputPath
 }
@@ -86,4 +89,32 @@ Start-Sleep -Seconds 2
 
 # Open personalize settings
 Start-Process "ms-settings:personalization-background"
+
+Start-Sleep -Seconds 2
+
+# Press Tab 2 times
+1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{TAB}") }
+Start-Sleep -Milliseconds 500
+
+# Press Down key 2 times
+1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{DOWN}") }
+Start-Sleep -Milliseconds 500
+
+# Press Tab 3 times
+1..3 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{TAB}") }
+Start-Sleep -Milliseconds 500
+
+# Press Up key 2 times
+1..2 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait("{UP}") }
+Start-Sleep -Milliseconds 500
+
+# Press Tab 1 time
+[System.Windows.Forms.SendKeys]::SendWait("{TAB}")
+
+# Press Spacebar 1 time
+[System.Windows.Forms.SendKeys]::SendWait(" ")
+Start-Sleep -Milliseconds 500
+
+# Press Alt + F4
+[System.Windows.Forms.SendKeys]::SendWait("%{F4}")
 
