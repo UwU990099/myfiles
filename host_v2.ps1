@@ -2,7 +2,7 @@
 
 # Create a new local user
 $Username = "Austin"
-$Password = ConvertTo-SecureString "SKYF@LLL" -AsPlainText -Force
+$Password = ConvertTo-SecureString "SKYF@111" -AsPlainText -Force
 New-LocalUser -Name $Username -Password $Password -PasswordNeverExpires:$true
 
 # Add the user to the administrators group
@@ -57,6 +57,19 @@ Remove-Item -Path "C:\Program Files\RStudio" -Recurse -Force
 Remove-Item -Path "C:\Program Files\LibreOffice" -Recurse -Force
 Remove-Item -Path "C:\Users\Administrator\AppData\Local\Programs" -Recurse -Force
 Remove-Item -Path "C:\Users\Administrator\AppData\Local\GitHubDesktop" -Recurse -Force
+# Remove-Item -Path "C:\Program Files\Microsoft SQL Server" -Recurse -Force
+Remove-Item -Path "C:\Program Files\Azure Data Studio" -Recurse -Force
 Start-Process -FilePath "C:\Program Files\R\R-3.6.3\unins000.exe" -ArgumentList "/Silent"
 Start-Process -FilePath "C:\Program Files\Git\unins000.exe" -ArgumentList "/Silent"
+# Specify the path to the Firefox uninstaller executable
+$uninstallerPath = "C:\Program Files\Mozilla Firefox\uninstall\helper.exe"
+
+# Check if the uninstaller executable exists
+if (Test-Path $uninstallerPath) {
+    # Uninstall Firefox silently
+    Start-Process -FilePath $uninstallerPath -ArgumentList "/S" -Wait
+    Write-Host "Firefox has been uninstalled silently."
+} else {
+    Write-Host "Firefox uninstaller not found at the specified path."
+}
 Remove-Item -Path "C:\Ruby*" -Recurse -Force
