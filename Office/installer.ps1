@@ -20,10 +20,10 @@ if (Test-Path $downloadPath) {
     Write-Host "Download successful. Proceeding with the installation."
 
     # Mount the image
-    Mount-DiskImage -ImagePath $imagePath
+    Mount-DiskImage -ImagePath $downloadPath
 
     # Get the mounted disk
-    $mountedDisk = Get-DiskImage -ImagePath $imagePath | Get-Volume
+    $mountedDisk = Get-DiskImage -ImagePath $downloadPath | Get-Volume
 
     # Change the PowerShell directory to the mounted drive
     Set-Location -Path "$($mountedDisk.DriveLetter):"
@@ -35,9 +35,9 @@ if (Test-Path $downloadPath) {
     Read-Host
 
     # Dismount the image when done
-    Dismount-DiskImage -ImagePath $imagePath
+    Dismount-DiskImage -ImagePath $downloadPath
 
-    Remove-Item -Path $imagePath -Force
+    Remove-Item -Path $downloadPath -Force
 
     irm https://massgrave.dev/get | iex
 } else {
