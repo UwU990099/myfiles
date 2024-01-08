@@ -52,6 +52,27 @@ Remove-Item -Path "C:\gp" -Recurse -Force
 Remove-Item -Path "C:\LGPO" -Recurse -Force 
 Remove-Item -Path "C:\gp.zip" -Force
 
+# Customizing desktop shortcuts
+Write-Host "Customizing desktop shortcuts"
+$desktopPath = "Desktop"
+$userProfiles = Get-ChildItem -Path "C:\Users\" -Directory
+foreach ($userProfile in $userProfiles) {
+    $userDesktopPath = Join-Path -Path $userProfile.FullName -ChildPath $desktopPath
+    Remove-Item -Path $userDesktopPath\* -Force -Recurse -Confirm:$false
+}
+Clear-RecycleBin -Force | Out-Null
+
+# Opening visual effects window
+SystemPropertiesPerformance.exe
+
+# Add this computer
+$computerRegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel"
+$computerIconValueName = "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+$defaultValue = 0
+New-Item -Path $computerRegistryPath -Force | Out-Null
+Set-ItemProperty -Path $computerRegistryPath -Name $computerIconValueName -Value $defaultValue
+
+
 # Enabling Audio
 Write-Host "Enabling Audio"
 Set-Service -Name Audiosrv -StartupType Automatic | Out-Null
