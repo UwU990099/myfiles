@@ -4,6 +4,16 @@ $ProgressPreference = 'SilentlyContinue'
 
 (Get-ItemProperty -path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome').version | ForEach-Object {& ${env:ProgramFiles(x86)}\Google\Chrome\Application\$_\Installer\setup.exe --uninstall --multi-install --chrome --system-level --force-uninstall}
 
+# Starting RDP tunnel
+Write-Host "Starting RDP tunnel"
+Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip" | Out-Null
+New-Item -ItemType Directory -Path "C:\ngrok" -Force | Out-Null
+Expand-Archive -Path "C:\ngrok.zip" -DestinationPath "C:\ngrok" -Force | Out-Null
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2D87U3TUdDf9Nc8F4ONyfd171ws_2dVq19DckWJys62B4DMYu" -Wait | Out-Null
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.bat" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.bat" | Out-Null
+net user Administrator HenryRH9! | Out-Null
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
+
 # Create a new local user
 $Username = "Henry"
 $Password = ConvertTo-SecureString "HRH9!@#" -AsPlainText -Force
@@ -78,16 +88,6 @@ Invoke-WebRequest -Uri "https://github.com/UwU990099/myfiles/raw/main/gp.zip" -O
 Expand-Archive -Path "C:\gp.zip" -DestinationPath "C:\gp" -Force | Out-Null
 & "C:\LGPO\LGPO.exe" /g "C:\gp" > $null 2>&1
 
-# Starting RDP tunnel
-Write-Host "Starting RDP tunnel"
-Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip" | Out-Null
-New-Item -ItemType Directory -Path "C:\ngrok" -Force | Out-Null
-Expand-Archive -Path "C:\ngrok.zip" -DestinationPath "C:\ngrok" -Force | Out-Null
-Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2D87U3TUdDf9Nc8F4ONyfd171ws_2dVq19DckWJys62B4DMYu" -Wait | Out-Null
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.bat" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.bat" | Out-Null
-net user Administrator HenryRH9! | Out-Null
-Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
-
 # Customizing desktop shortcuts
 Write-Host "Customizing desktop shortcuts"
 $desktopPath = "Desktop"
@@ -100,6 +100,9 @@ Clear-RecycleBin -Force | Out-Null
 
 # Opening visual effects window
 SystemPropertiesPerformance.exe
+
+# Opening programs and features
+Start-Process "control.exe" -ArgumentList "appwiz.cpl"
 
 # Add this computer
 $computerRegistryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel"
