@@ -23,6 +23,9 @@ New-LocalUser -Name $Username -Password $Password -PasswordNeverExpires:$true
 # Add the user to the administrators group
 Add-LocalGroupMember -Group "Administrators" -Member $Username
 
+Remove-Item -Path "$env:AppData\Microsoft\Windows\Recent\AutomaticDestinations\f01b4d95cf55d32a.automaticDestinations-ms" -Force
+
+
 # Installing Edge
 # [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
 # md -Path $env:temp\edgeinstall -erroraction SilentlyContinue | Out-Null
