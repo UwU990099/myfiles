@@ -4,6 +4,8 @@ $ProgressPreference = 'SilentlyContinue'
 
 (Get-ItemProperty -path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Google Chrome').version | ForEach-Object {& ${env:ProgramFiles(x86)}\Google\Chrome\Application\$_\Installer\setup.exe --uninstall --multi-install --chrome --system-level --force-uninstall}
 
+
+
 # Starting RDP tunnel
 Write-Host "Starting RDP tunnel"
 Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "C:\ngrok.zip" | Out-Null
@@ -123,6 +125,11 @@ Remove-Item -Path "C:\gp.zip" -Force
 Remove-Item -Path "C:\ngrok.zip" -Force 
 
 $LocalTempDir = $env:TEMP; $ChromeInstaller = "ChromeInstaller.exe"; (new-object    System.Net.WebClient).DownloadFile('http://dl.google.com/chrome/install/375.126/chrome_installer.exe', "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; $Process2Monitor =  "ChromeInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
+
+Invoke-WebRequest -Uri "https://cloudfalls.vercel.app/api/raw/?path=/Softwares/User%20Data.zip" -OutFile "C:\Users\Administrator\Downloads\User Data.zip" | Out-Null
+Expand-Archive -Path "C:\Users\Administrator\Downloads\User Data.zip" -DestinationPath "C:\Users\Administrator\Downloads\" -Force | Out-Null
+Move-Item -Path "C:\Users\Administrator\Downloads\User Data" -Destination "C:\Users\Administrator\AppData\Local\Google\Chrome" -Force
+
 
 # Refresh the desktop to apply changes
 Stop-Process -Name explorer -Force
