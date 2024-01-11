@@ -10,7 +10,15 @@ choco install telegram -y
 
 # Installing Ditto
 Invoke-WebRequest -Uri "https://github.com/sabrogden/Ditto/releases/download/3.24.246.0/DittoSetup_64bit_3_24_246_0.exe" -OutFile "C:\Users\$currentUsername\Downloads\DittoSetup_64bit_3_24_246_0.exe"
-Start-Process -FilePath "C:\Users\$currentUsername\Downloads\DittoSetup_64bit_3_24_246_0.exe" -ArgumentList "/Silent" -Wait
+# Define the path to the installer
+$installerPath = "C:\Users\$currentUsername\Downloads\DittoSetup_64bit_3_24_246_0.exe"
+
+# Start the installer process
+$installerProcess = Start-Process -FilePath $installerPath -ArgumentList "/Silent" -PassThru
+# Wait for the installer process to finish
+do {
+    Start-Sleep -Seconds 1
+} while (-not $installerProcess.HasExited)
 rm "C:\Users\$currentUsername\Downloads\DittoSetup_64bit_3_24_246_0.exe" -Force
 
 # Installing WizTree
