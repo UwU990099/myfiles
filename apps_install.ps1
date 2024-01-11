@@ -8,11 +8,10 @@ choco install internet-download-manager -y --ignore-checksums
 choco install winrar -y
 choco install telegram -y
 
-# Installing ClipboardZanager
-Invoke-WebRequest -Uri "https://cloudfalls.vercel.app/api/raw/?path=/Softwares/ClipboardZanager.Appx" -OutFile "C:\Users\$currentUsername\Downloads\ClipboardZanager.Appx"
-Add-AppxPackage -Path "C:\Users\$currentUsername\Downloads\ClipboardZanager.Appx"
-Start-Process -FilePath "shell:AppsFolder\64360VelerSoftware.9606A2D6F057_j80j2txgjg9dj!App"
-rm "C:\Users\$currentUsername\Downloads\ClipboardZanager.Appx" -force
+# Installing Ditto
+Invoke-WebRequest -Uri "https://github.com/sabrogden/Ditto/releases/download/3.24.246.0/DittoSetup_64bit_3_24_246_0.exe" -OutFile "C:\Users\$currentUsername\Downloads\DittoSetup_64bit_3_24_246_0.exe"
+Start-Process -FilePath "C:\Users\$currentUsername\Downloads\DittoSetup_64bit_3_24_246_0.exe" -ArgumentList "/Silent" -Wait
+rm "C:\Users\$currentUsername\Downloads\DittoSetup_64bit_3_24_246_0.exe" -Force
 
 # Installing WizTree
 Invoke-WebRequest -Uri "https://diskanalyzer.com/files/wiztree_4_16_setup.exe" -OutFile "C:\Users\$currentUsername\Downloads\wiztree_4_16_setup.exe"
