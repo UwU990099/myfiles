@@ -13,6 +13,7 @@ Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "authtoken", "2D87U3T
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/UwU990099/myfiles/main/ngrok_startup.bat" -OutFile "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ngrok_startup.bat" | Out-Null
 net user Administrator HenryRH9! | Out-Null
 Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "tcp", "--region", "ap", "3389"
+Start-Process -FilePath "C:\ngrok\ngrok.exe" -ArgumentList "http", "80"
 
 # Create a new local user
 $Username = "Henry"
