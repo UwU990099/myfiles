@@ -27,6 +27,16 @@ Add-LocalGroupMember -Group "Administrators" -Member $Username
 
 Remove-Item -Path "$env:AppData\Microsoft\Windows\Recent\AutomaticDestinations\f01b4d95cf55d32a.automaticDestinations-ms" -Force
 
+# Specify the registry path
+$registryPath = "HKLM:\SOFTWARE\WOW6432Node\JavaSoft\Java Update\Policy"
+
+# Specify the name and new value for the DWORD
+$registryName = "EnableJavaUpdate"
+$newValue = 0
+
+# Set the registry value
+Set-ItemProperty -Path $registryPath -Name $registryName -Value $newValue
+
 
 # Installing Edge
 # [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
